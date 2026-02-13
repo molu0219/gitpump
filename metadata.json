@@ -1,0 +1,5 @@
+{
+  "name": "GitPump",
+  "description": "A Web3 platform for the Solana ecosystem where users can submit GitHub repositories, vote on them, and watch them graduate from the Voting Zone to the Launchpad.",
+  "requestFramePermissions": []
+}

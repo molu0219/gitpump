@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git pump -m | Solana Protocol Index</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @font-face {
+      font-family: "Departure Mono";
+      src: url("https://cdn.jsdelivr.net/gh/rektdeckard/departure-mono@v1.341/fonts/DepartureMono-Regular.woff2") format("woff2");
+    }
+
+    :root {
+      --bg-dark: #020308;
+      --accent-cyan: #00F2FF;
+      --accent-lime: #ADFF00;
+      --text-main: #f1f5f9;
+      --glass: rgba(10, 12, 20, 0.7);
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: "Departure Mono", monospace;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* 高級雜訊濾鏡 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .pixel-grid {
+      background-image: radial-gradient(circle at 1px 1px, rgba(0, 242, 255, 0.05) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .neon-text-cyan { text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
+    .neon-text-lime { text-shadow: 0 0 10px rgba(173, 255, 0, 0.5); }
+
+    .glass-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(0, 242, 255, 0.3);
+      background: rgba(10, 12, 20, 0.9);
+      transform: translateY(-2px);
+    }
+
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+    .scanline {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--accent-cyan), transparent);
+      opacity: 0.1;
+      position: absolute;
+      animation: scanline 8s linear infinite;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.45.4",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
+</head>
+<body class="pixel-grid">
+  <div class="scanline"></div>
+  <div id="root"></div>
+</body>
+</html>
