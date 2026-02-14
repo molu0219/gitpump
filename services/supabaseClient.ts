@@ -1,18 +1,19 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-/**
- * Supabase configuration
- * The URL is now updated to the one provided: https://djqcgvprlntkfkalhsva.supabase.co
- */
-const supabaseUrl = process.env.SUPABASE_URL || 'https://djqcgvprlntkfkalhsva.supabase.co';
+// 直接 Hardcode 您提供的憑證
+const supabaseUrl = 'https://djqcgvprlntkfkalhsva.supabase.co';
+const supabaseAnonKey = 'sb_publishable_Bv33rD0JKrCAwnTMsjmsYA_Jbu_4008';
+
+export const isSupabaseConfigured = true;
 
 /**
- * Note: If the project URL has changed, the anon key might also need updating 
- * to match the new project 'djqcgvprlntkfkalhsva'.
+ * 核心 Supabase 客戶端實例
  */
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || 'sb_publishable_Bv33rD0JKrCAwnTMsjmsYA_Jbu_4008';
-
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-console.log(`GitPump: Supabase initialized at ${supabaseUrl}`);
+/**
+ * 為了保持兼容性保留的空函式
+ */
+export const saveSupabaseConfig = () => {};
+export const clearSupabaseConfig = () => {};

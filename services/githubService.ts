@@ -2,51 +2,41 @@
 export const getRepoData = async (githubUrl: string) => {
   try {
     const url = new URL(githubUrl.trim().replace(/\/$/, ''));
-    const pathParts = url.pathname.split('/').filter(p => p);
-    const owner = pathParts[0];
-    const repo = pathParts[1];
+    const [, owner, repo] = url.pathname.split('/');
+    if (!owner || !repo) throw new Error('Invalid URL');
 
-    // 1. Fetch Repository Stats via GitHub API
     const apiResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-    if (!apiResponse.ok) throw new Error('Repository not found on GitHub');
+    if (!apiResponse.ok) throw new Error('Repository not found');
     const stats = await apiResponse.json();
 
-    // 2. Fetch README content directly from raw source
+    // Optimizing README fetch: Try main branch first, then master
     let readmeText = '';
-    const branches = ['main', 'master', 'dev', 'develop'];
-    const filenames = ['README.md', 'readme.md', 'README.MD', 'README'];
+    const branches = [stats.default_branch || 'main', 'master'];
+    const filenames = ['README.md', 'readme.md'];
     
-    // Attempt common combinations
     for (const branch of branches) {
       if (readmeText) break;
       for (const filename of filenames) {
         try {
-          const readmeResponse = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filename}`);
-          if (readmeResponse.ok) {
-            readmeText = await readmeResponse.text();
+          const res = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filename}`);
+          if (res.ok) {
+            readmeText = await res.text();
             break;
           }
-        } catch (e) {}
+        } catch {}
       }
     }
 
-    if (!readmeText) {
-      readmeText = stats.description || "No detailed README found. Please visit the GitHub repository for documentation and source code.";
-    }
-
-    // Limit README size to avoid database bloat while keeping enough for preview
-    const truncatedReadme = readmeText.substring(0, 5000);
-
     return {
-      owner: owner,
+      owner,
       repoName: repo,
-      summary: truncatedReadme,
-      tags: stats.topics && stats.topics.length > 0 ? stats.topics : [stats.language || 'Code', 'Web3', 'OpenSource'],
+      summary: (readmeText || stats.description || "Source verified.").substring(0, 4000),
+      tags: stats.topics?.length ? stats.topics : [stats.language || 'Web3', 'Solana'],
       stars: stats.stargazers_count,
       forks: stats.forks_count,
     };
   } catch (error) {
-    console.error('GitHub fetch failed:', error);
+    console.error('GitHub Sync Error:', error);
     throw error;
   }
 };

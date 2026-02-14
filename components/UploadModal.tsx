@@ -72,7 +72,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload, lo
                <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
              </div>
              <p className="text-[11px] md:text-[13px] text-slate-700 italic font-black leading-tight uppercase tracking-tight">
-               FEE: 0.00 SOL. <br/>REQUIRES_OPERATOR_SIGNATURE.
+               FEE: 0.00 SOL. <br/>REQUIRES_WALLET_SIGNATURE.
              </p>
           </div>
 
@@ -83,7 +83,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload, lo
               loading || !isValidRepo ? 'bg-white/5 text-slate-900 border border-white/5 cursor-not-allowed' : 'bg-white text-black hover:bg-[#00F2FF] hover:text-white shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:-translate-y-1'
             }`}
           >
-            {loading ? <div className="w-8 h-8 border-4 border-black/20 border-t-black rounded-full animate-spin" /> : <span className="whitespace-nowrap">SUBMIT_PROTOCOL_TO_INDEX</span>}
+            {loading ? <div className="w-8 h-8 border-4 border-black/20 border-t-black rounded-full animate-spin" /> : <span className="whitespace-nowrap">SIGN & SUBMIT_PROTOCOL</span>}
           </button>
         </form>
       </div>

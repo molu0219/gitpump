@@ -28,7 +28,6 @@
       overflow-x: hidden;
     }
 
-    /* 高級雜訊濾鏡 */
     body::before {
       content: "";
       position: fixed;
@@ -72,9 +71,6 @@
       position: absolute;
       animation: scanline 8s linear infinite;
     }
-
-    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
   </style>
 <script type="importmap">
 {
@@ -83,7 +79,12 @@
     "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.45.4",
     "react/": "https://esm.sh/react@^19.2.4/",
     "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "@solana/web3.js": "https://esm.sh/@solana/web3.js@^1.95.3",
+    "@solana/spl-token": "https://esm.sh/@solana/spl-token@^0.4.8",
+    "bn.js": "https://esm.sh/bn.js@^5.2.1",
+    "buffer": "https://esm.sh/buffer@^6.0.3",
+    "bs58": "https://esm.sh/bs58@^6.0.0"
   }
 }
 </script>

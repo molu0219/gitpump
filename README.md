@@ -1,20 +1,61 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🚀 GitPump Protocol (gitpump -m)
 
-# Run and deploy your AI Studio app
+GitPump 是一個建立在 Solana 生態系上的 Web3 索引平台，旨在將開源代碼 (GitHub Repositories) 轉化為鏈上資產。透過社群投票機制，優質專案將從「投票區 (Voting Zone)」畢業，並自動透過 Pump.fun 聯合曲線 (Bonding Curve) 發射代幣。
 
-This contains everything you need to run your app locally.
+## 🛠 技術架構 (Technical Architecture)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1Xu6eeQHoz9_Q-nDmRqBVBEyVfiv9VBbL
+### 1. 前端架構 (Frontend Stack)
+*   **核心框架**: React 19 (ES6 Modules via ESM.sh)。
+*   **樣式系統**: Tailwind CSS (客製化 Terminal 風格)。
+*   **字體系統**: `Departure Mono` (營造復古硬核終端機感)。
+*   **視覺特效**: Canvas-based 技術粒子背景 (`TechParticles`)、掃描線動畫、以及玻璃擬態 (Glassmorphism)。
 
-## Run Locally
+### 2. Web3 與 Solana 整合
+*   **錢包連接**: 支援 Phantom、OKX 等標準 Solana 錢包 (使用 `@solana/web3.js`)。
+*   **資產發射**: 整合 **Pump.fun** 協議，實作 `Bonding Curve` 代幣部署邏輯。
+*   **安全機制**: 
+    *   **Hot Wallet Session**: 針對管理員提供記憶體級別的私鑰會話，實現自動化無感簽章畢業 (Auto-Pilot)。
+    *   **Signature-based Voting**: 所有的投票均需經過錢包簽署，確保共識的真實性。
 
-**Prerequisites:**  Node.js
+### 3. AI 驅動分析 (Google Gemini API)
+*   **Repository 分析**: 使用 `gemini-3-flash-preview` 提取 GitHub README 的核心技術特徵，生成簡短摘要與技術標籤。
+*   **Metadata 生成**: 使用 `gemini-3-pro-preview` 根據專案內容自動產出符合代幣化標準的名稱、Ticker 以及極短描述。
 
+### 4. 後端與儲存服務 (Supabase)
+*   **資料庫**: 實時追蹤專案狀態 (VOTING -> LAUNCHED)、得票數與錢包關聯。
+*   **檔案託管**: 
+    *   **Metadata Hosting**: 使用 Supabase Storage 託管代幣 Metadata (JSON)。
+    *   **備援機制**: 支援 IPFS (via The Graph/Stoken) 作為去中心化存儲備援。
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🎨 UI/UX 設計規範 (Design Excellence)
+
+### 視覺風格
+*   **主題**: 賽博龐克終端機 (Cyber-Terminal)。
+*   **色調**: 
+    *   背景: `#020308` (深邃黑)。
+    *   主色: `#00F2FF` (霓虹青)。
+    *   畢業色: `#ADFF00` (螢光萊姆)。
+    *   警告色: `#EF4444` (警示紅)。
+
+### 交互邏輯
+*   **RepoCard**: 高度可視化的統計數據，包含大型 GitHub 風格的 Stars 與 Forks 圖標。
+*   **Consensus Index**: 帶有霓虹呼吸效果的進度條，顯示專案離畢業門檻 (100 票) 的距離。
+*   **Terminal Mode**: 管理員專用界面，提供原始數據視角與協議控制權。
+
+## 🔄 核心工作流 (Standard Operating Procedure)
+
+1.  **提交 (Submit)**: 用戶輸入 GitHub URL -> 系統獲取 API 數據。
+2.  **分析 (Analyze)**: Gemini AI 解析代碼庫 -> 生成技術摘要。
+3.  **投票 (Vote)**: 社群用戶簽名投票 -> 累進 Consensus 指數。
+4.  **畢業 (Graduate)**: 票數達到門檻 (100 票) -> 觸發 Pump.fun 指令。
+5.  **發射 (Launch)**: 自動部署代幣 -> 導向交易界面 (`TRADE` 按鈕)。
+
+## 📁 目錄結構
+
+*   `/components`: UI 組件 (Navbar, RepoCard, Modals, etc.)。
+*   `/services`: 外部整合服務 (Gemini, GitHub, Pump.fun, Supabase)。
+*   `types.ts`: 全域 TypeScript 介面定義。
+*   `App.tsx`: 核心狀態管理與路由邏輯。
+
+---
+*Developed as a high-performance Solana Protocol Index.*
