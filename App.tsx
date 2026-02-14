@@ -21,7 +21,8 @@ import bs58 from 'bs58';
 const LAUNCH_THRESHOLD = 100; 
 const ITEMS_PER_PAGE = 10;
 const ADMIN_WALLETS = ['FJjCGRV7qPT4PnKaWaSDq2RLGUwqYouTMXMj3fQXdyKA'];
-const RPC_ENDPOINT = 'https://solana-mainnet.g.alchemy.com/v2/ckjmLje1BsXb3C2Oxnh6gM5NdbvmrQMq';
+// 從環境變數讀取 RPC，確保安全性
+const RPC_ENDPOINT = process.env.VITE_RPC_URL || 'https://solana-mainnet.g.alchemy.com/v2/ckjmLje1BsXb3C2Oxnh6gM5NdbvmrQMq';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ProjectStatus | 'ADMIN'>(ProjectStatus.VOTING);

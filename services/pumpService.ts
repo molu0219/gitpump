@@ -31,7 +31,7 @@ export interface LaunchResult {
   error?: string;
 }
 
-const RPC_ENDPOINT = 'https://solana-mainnet.g.alchemy.com/v2/ckjmLje1BsXb3C2Oxnh6gM5NdbvmrQMq';
+const RPC_ENDPOINT = process.env.VITE_RPC_URL || 'https://solana-mainnet.g.alchemy.com/v2/ckjmLje1BsXb3C2Oxnh6gM5NdbvmrQMq';
 
 /**
  * 發射新代幣
